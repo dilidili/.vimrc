@@ -9,6 +9,8 @@ call plug#begin("~/.vim/autoload")
   Plug 'peitalin/vim-jsx-typescript'
   Plug 'preservim/nerdcommenter'
   Plug 'nikvdp/neomux'
+  Plug 'tpope/vim-fugitive'
+  Plug 'easymotion/vim-easymotion'
 call plug#end()
 
 if (has("termguicolors"))
@@ -226,3 +228,9 @@ imap <C-j> <Plug>(coc-snippets-expand-jump)
 
 " Use <leader>x for convert visual selected code to snippet
 xmap <leader>x  <Plug>(coc-convert-snippet)
+
+autocmd User EasyMotionPromptBegin silent! CocDisable
+autocmd User EasyMotionPromptEnd silent! CocEnable
+
+" NERDTree
+map <leader>r :NERDTreeFind<cr>
