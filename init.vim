@@ -2,7 +2,7 @@ call plug#begin("~/.vim/autoload")
   Plug 'dracula/vim'
   Plug 'scrooloose/nerdtree'
   Plug 'ryanoasis/vim-devicons'
-  Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
+  Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
   Plug 'junegunn/fzf.vim'
   Plug 'neoclide/coc.nvim', {'branch': 'release'}
   Plug 'leafgarland/typescript-vim'
@@ -11,6 +11,9 @@ call plug#begin("~/.vim/autoload")
   Plug 'nikvdp/neomux'
   Plug 'tpope/vim-fugitive'
   Plug 'easymotion/vim-easymotion'
+  Plug 'ryanoasis/vim-devicons'
+  Plug 'nvim-lua/plenary.nvim'
+  Plug 'sindrets/diffview.nvim'
 call plug#end()
 
 if (has("termguicolors"))
@@ -38,10 +41,10 @@ let g:fzf_action = {
   \ 'ctrl-s': 'split',
   \ 'ctrl-v': 'vsplit'
   \}
-let $FZF_DEFAULT_COMMAND = 'ag -g ""'
+let $FZF_DEFAULT_COMMAND = 'ag -g "" --ignore node_modules'
 
 " Coc
-let g:coc_global_extensions = ['coc-emmet', 'coc-css', 'coc-html', 'coc-json', 'coc-prettier', 'coc-tsserver', 'coc-snippets']
+let g:coc_global_extensions = ['coc-emmet', 'coc-css', 'coc-html', 'coc-json', 'coc-prettier', 'coc-tsserver', 'coc-snippets', 'coc-eslint']
 set listchars=eol:⏎,tab:>-,trail:·,extends:>,precedes:<
 set list
 
@@ -234,3 +237,6 @@ autocmd User EasyMotionPromptEnd silent! CocEnable
 
 " NERDTree
 map <leader>r :NERDTreeFind<cr>
+
+" Map copy action in WSL
+vnoremap <C-c> :'<,'>w !clip.exe<CR><CR>
